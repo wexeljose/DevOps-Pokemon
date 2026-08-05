@@ -2,7 +2,7 @@ import os
 import json
 import requests
 import random
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
@@ -100,6 +100,11 @@ def load_pokemons():
             print(f"  [{i}/{POKEMON_COUNT}] {data['nombre']} cargado")
     save_to_json()
     print(f"¡{len(POKEMONS)} Pokemon cargados y guardados en {JSON_FILE}!")
+
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 
 @app.route("/pokemons", methods=["GET"])

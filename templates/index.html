@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon API - CRUD</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pokemon API</h1>
+        <p>CRUD con Flask y PokeAPI</p>
+    </header>
+
+    <main>
+        <section class="actions">
+            <button id="btn-load" class="btn btn-primary">Cargar Pokemon</button>
+            <button id="btn-add" class="btn btn-success">Agregar Pokemon</button>
+        </section>
+
+        <section class="search">
+            <input type="text" id="search-input" placeholder="Buscar Pokemon por nombre...">
+            <button id="btn-search" class="btn btn-secondary">Buscar</button>
+            <button id="btn-clear" class="btn btn-secondary">Limpiar</button>
+        </section>
+
+        <section id="pokemon-container" class="pokemon-grid">
+            <!-- Pokemon cards will be inserted here -->
+        </section>
+
+        <section id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Cargando Pokemon...</p>
+        </section>
+
+        <section id="no-results" class="no-results hidden">
+            <p>No se encontraron Pokemon.</p>
+        </section>
+    </main>
+
+    <!-- Modal para crear/editar Pokemon -->
+    <div id="pokemon-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Agregar Pokemon</h2>
+            <form id="pokemon-form">
+                <input type="hidden" id="pokemon-id">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="imagen">URL de Imagen:</label>
+                    <input type="url" id="imagen" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="peso">Peso (kg):</label>
+                        <input type="number" id="peso" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="altura">Altura (m):</label>
+                        <input type="number" id="altura" step="0.1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fuerza">Fuerza:</label>
+                        <input type="number" id="fuerza" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">Edad:</label>
+                        <input type="number" id="edad" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="habilidades">Habilidades (separadas por coma):</label>
+                    <input type="text" id="habilidades" placeholder="ej: static, lightning-rod" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" id="tipo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="habitat">Habitat:</label>
+                    <input type="text" id="habitat" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmacion para eliminar -->
+    <div id="delete-modal" class="modal hidden">
+        <div class="modal-content modal-small">
+            <span class="close">&times;</span>
+            <h2>Eliminar Pokemon</h2>
+            <p>Estas seguro de que quieres eliminar a <strong id="delete-name"></strong>?</p>
+            <div class="modal-actions">
+                <button id="btn-confirm-delete" class="btn btn-danger">Eliminar</button>
+                <button id="btn-cancel-delete" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalles del Pokemon -->
+    <div id="detail-modal" class="modal hidden">
+        <div class="modal-content modal-detail">
+            <span class="close">&times;</span>
+            <div id="detail-content">
+                <!-- Pokemon details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>API CRUD Pokemon - Flask + PokeAPI</p>
+    </footer>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

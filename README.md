@@ -1,6 +1,6 @@
 # Mini Proyecto - API CRUD de Pokemon con Flask
 
-API REST que gestiona informacion de Pokemon utilizando Flask y la PokeAPI.
+API REST que gestiona informacion de Pokemon utilizando Flask y la PokeAPI. Los datos se persisten en un archivo JSON local (`pokemons.json`). Incluye un frontend web para interactuar con la API.
 
 ## Instalacion
 
@@ -27,7 +27,21 @@ pip install -r requirements.txt
 python app.py
 ```
 
-La API iniciara en `http://localhost:5000` y cargara automaticamente los primeros 50 Pokemon desde PokeAPI.
+La API iniciara en `http://localhost:5000`.
+
+- **Primera ejecucion**: carga los primeros 50 Pokemon desde PokeAPI y los guarda en `pokemons.json`.
+- **Siguientes ejecuciones**: carga los datos desde `pokemons.json` (rapido, sin llamadas HTTP).
+
+## Frontend
+
+Abre `http://localhost:5000` en tu navegador para acceder a la interfaz web. El frontend permite:
+
+- Ver todos los Pokemon en una cuadricula
+- Buscar Pokemon por nombre, tipo o habitat
+- Ver detalles de cada Pokemon
+- Crear nuevos Pokemon
+- Editar Pokemon existentes
+- Eliminar Pokemon
 
 ## Endpoints
 
@@ -85,8 +99,36 @@ curl -X DELETE http://localhost:5000/pokemons/150
 }
 ```
 
+## Persistencia
+
+Los datos se guardan en el archivo `pokemons.json` en la misma carpeta del proyecto. Cada operacion CRUD (crear, actualizar, eliminar) actualiza el archivo automaticamente. Si se elimina `pokemons.json`, la app volvera a cargar los datos desde PokeAPI en la proxima ejecucion.
+
+### Estructura de pokemons.json
+
+```json
+{
+  "next_id": 51,
+  "pokemons": [
+    {
+      "id": 1,
+      "nombre": "Bulbasaur",
+      "imagen": "https://raw.githubusercontent.com/.../1.png",
+      "caracteristicas": {
+        "peso": 6.9,
+        "altura": 0.7,
+        "fuerza": 49,
+        "edad": 12
+      },
+      "habilidades": ["overgrow", "chlorophyll"],
+      "tipo": "grass",
+      "habitat": "grassland"
+    }
+  ]
+}
+```
+
 ## Notas
 
-- Los datos se almacenan en memoria (se pierden al reiniciar el servidor).
 - El campo `edad` se genera aleatoriamente ya que PokeAPI no lo proporciona.
-- La carga inicial tarda aproximadamente 30-60 segundos.
+- La primera carga desde PokeAPI tarda aproximadamente 30-60 segundos.
+- Las siguientes ejecuciones son rapidas ya que cargan desde el JSON local.
