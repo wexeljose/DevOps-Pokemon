@@ -6,7 +6,7 @@ API REST que gestiona informacion de Pokemon utilizando Flask y la PokeAPI. Los 
 
 1. Clonar el repositorio:
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/wexeljose/DevOps-Pokemon.git
 cd Poke
 ```
 
