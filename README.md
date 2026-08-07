@@ -1,4 +1,4 @@
-# Mini Proyecto - API CRUD de Pokemon con Flask
+# Mini Proyecto - API CRUD de Pokemon con Flask.
 
 API REST que gestiona informacion de Pokemon utilizando Flask y la PokeAPI. Los datos se persisten en un archivo JSON local (`pokemons.json`). Incluye un frontend web para interactuar con la API.
 
@@ -7,24 +7,49 @@ API REST que gestiona informacion de Pokemon utilizando Flask y la PokeAPI. Los 
 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/wexeljose/DevOps-Pokemon.git
-cd Poke
+cd DevOps-Pokemon
 ```
 
-2. Crear entorno virtual (opcional pero recomendado):
-```bash
-python -m venv venv
-venv\Scripts\activate  # Windows
+2. Crear el entorno virtual.
+
+En Windows (PowerShell):
+```powershell
+py -3 -m venv venv
 ```
 
-3. Instalar dependencias:
+Si el lanzador `py` no detecta Python, se puede usar directamente la instalacion
+local (ajusta la version de la carpeta si corresponde):
+```powershell
+& "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" -m venv venv
+```
+
+No es necesario activar el entorno. Instala las dependencias usando directamente
+su interprete, lo que tambien funciona si PowerShell bloquea `Activate.ps1`:
+```powershell
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Activacion opcional en PowerShell:
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+En Linux o macOS:
 ```bash
-pip install -r requirements.txt
+python3 -m venv venv
+./venv/bin/python -m pip install -r requirements.txt
 ```
 
 ## Ejecutar
 
+En Windows (PowerShell):
+```powershell
+.\venv\Scripts\python.exe app.py
+```
+
+En Linux o macOS:
 ```bash
-python app.py
+./venv/bin/python app.py
 ```
 
 La API iniciara en `http://localhost:5000`.
