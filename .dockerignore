@@ -1,0 +1,12 @@
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.py[cod]
+*.pdf
+pokemons.json
+tmp
+.pytest_cache
+.idea
+.vscode

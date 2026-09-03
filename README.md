@@ -157,3 +157,29 @@ Los datos se guardan en el archivo `pokemons.json` en la misma carpeta del proye
 - El campo `edad` se genera aleatoriamente ya que PokeAPI no lo proporciona.
 - La primera carga desde PokeAPI tarda aproximadamente 30-60 segundos.
 - Las siguientes ejecuciones son rapidas ya que cargan desde el JSON local.
+
+## Docker
+
+Construir la imagen:
+
+```bash
+docker build -t devops-pokemon:1.0.0 .
+```
+
+Ejecutar el contenedor:
+
+```bash
+docker run --rm --name devops-pokemon -p 5000:5000 devops-pokemon:1.0.0
+```
+
+Validar la aplicacion y su estado:
+
+```bash
+curl http://localhost:5000/
+curl http://localhost:5000/health
+```
+
+El contenedor sirve la aplicacion con Gunicorn, se ejecuta con un usuario sin
+privilegios, incorpora un `HEALTHCHECK` y excluye archivos locales innecesarios
+mediante `.dockerignore`. La primera ejecucion necesita acceso a Internet para
+descargar los datos iniciales desde PokeAPI.

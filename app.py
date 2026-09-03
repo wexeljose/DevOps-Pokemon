@@ -107,6 +107,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok", "pokemon_count": len(POKEMONS)}), 200
+
+
 @app.route("/pokemons", methods=["GET"])
 def get_pokemons():
     return jsonify(POKEMONS), 200
@@ -208,6 +213,12 @@ def delete_pokemon(pokemon_id):
     return jsonify({"message": f"Pokemon {pokemon['nombre']} eliminado correctamente"}), 200
 
 
-if __name__ == "__main__":
+def create_app():
     load_pokemons()
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    return app
+
+
+if __name__ == "__main__":
+    debug = os.getenv("FLASK_DEBUG", "false").lower() in {"1", "true", "yes"}
+    port = int(os.getenv("PORT", "5000"))
+    create_app().run(debug=debug, host="0.0.0.0", port=port)
