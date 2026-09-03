@@ -7,7 +7,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN groupadd --system app \
-    && useradd --system --gid app --create-home app
+    && useradd --system --gid app --create-home app \
+    && chown app:app /app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
